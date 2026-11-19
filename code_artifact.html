@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لماذا يفشل المستثمر الفرد؟ — ملف صحفي تحليلي</title>
+
+  <!-- استيراد الخطوط العربية الصحفية والتحريرية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- مكتبة Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            newsprint: '#f6f2e9',
+            newsprintCard: '#fcfaf5',
+            newsprintTint: '#ede6d8',
+            inkPrimary: '#1a1816',
+            inkSecondary: '#3b3733',
+            borderRule: '#c5bba8',
+            editorialRed: '#8a1c1c',
+            editorialNavy: '#1a365d',
+            editorialGold: '#8c6222'
+          },
+          fontFamily: {
+            serifAr: ['"Amiri"', 'Georgia', 'serif'],
+            sansAr: ['"IBM Plex Sans Arabic"', '"Cairo"', 'system-ui', 'sans-serif'],
+            displayAr: ['"Cairo"', '"IBM Plex Sans Arabic"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* الأساس العام للصفحة والملمس الورقي الصحفي */
+    body {
+      background-color: #dfd7c8;
+      color: #1a1816;
+      font-family: 'IBM Plex Sans Arabic', 'Cairo', system-ui, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .paper-sheet {
+      background-color: #f6f2e9;
+      background-image:
+        radial-gradient(rgba(26, 24, 22, 0.028) 1px, transparent 0),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.25), rgba(237, 230, 216, 0.2));
+      background-size: 18px 18px, 100% 100%;
+    }
+
+    /* الإطار الصحفي المزدوج */
+    .double-editorial-rule {
+      border-top: 3px double #1a1816;
+      border-bottom: 3px double #1a1816;
+    }
+
+    /* تقسيم الأعمدة الصحفية المتجاوبة */
+    .broadsheet-cols-2 {
+      column-count: 1;
+      column-gap: 2.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .broadsheet-cols-2 {
+        column-count: 2;
+        column-rule: 1px solid #c5bba8;
+      }
+    }
+
+    /* منع انقسام البطاقات أو الصناديق المميزة بين الأعمدة */
+    .no-col-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* إجبار وضع المعاينة اليدوي (سطح المكتب أو الجوال) */
+    .force-desktop-view .broadsheet-cols-2 {
+      column-count: 2 !important;
+      column-rule: 1px solid #c5bba8 !important;
+    }
+
+    .force-desktop-view .responsive-grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .force-mobile-view .broadsheet-cols-2 {
+      column-count: 1 !important;
+      column-rule: none !important;
+    }
+
+    .force-mobile-view .responsive-grid-2 {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* حرف استهلالي صحفي أنيق لبداية الافتتاحية */
+    .editorial-dropcap::first-letter {
+      font-family: 'Amiri', serif;
+      font-size: 2.65rem;
+      font-weight: 700;
+      line-height: 0.9;
+      float: right;
+      margin-left: 0.55rem;
+      margin-top: 0.1rem;
+      color: #8a1c1c;
+    }
+
+    .force-mobile-view .editorial-dropcap::first-letter {
+      font-size: 1.9rem;
+      line-height: 1.1;
+    }
+
+    .toolbar-btn-active {
+      background-color: #1a1816 !important;
+      color: #f6f2e9 !important;
+      border-color: #1a1816 !important;
+    }
+
+    /* تنسيقات الطباعة وحفظ PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #newspaper-shell {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+      }
+      .paper-sheet {
+        background: #ffffff !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen py-4 sm:py-8 px-2.5 sm:px-6">
+
+  <!-- شريط أدوات التحكم والمعاينة والطباعة -->
+  <header class="no-print max-w-6xl mx-auto mb-4 sm:mb-6 bg-newsprintCard border border-borderRule rounded-xl shadow-sm p-3 sm:p-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-editorialRed shrink-0"></span>
+        <div>
+          <p class="text-xs sm:text-sm font-bold text-inkPrimary">
+            معاينة الجريدة التحليلية الكاملة — اختر وضع العرض المناسب للقراءة أو الحفظ
+          </p>
+          <p class="text-[11px] text-inkSecondary">
+            مصممة لتعمل بسلاسة على شاشة الجوال الطولية وكذلك بتخطيط الصحيفة المزدوج على الشاشات الكبيرة
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button
+          id="btn-auto"
+          type="button"
+          onclick="switchViewMode('auto')"
+          class="toolbar-btn-active px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-borderRule bg-newsprint text-inkPrimary hover:bg-newsprintTint transition cursor-pointer"
+        >
+          تلقائي حسب الشاشة
+        </button>
+
+        <button
+          id="btn-desktop"
+          type="button"
+          onclick="switchViewMode('desktop')"
+          class="px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-borderRule bg-newsprint text-inkPrimary hover:bg-newsprintTint transition cursor-pointer"
+        >
+          معاينة سطح المكتب
+        </button>
+
+        <button
+          id="btn-mobile"
+          type="button"
+          onclick="switchViewMode('mobile')"
+          class="px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-borderRule bg-newsprint text-inkPrimary hover:bg-newsprintTint transition cursor-pointer"
+        >
+          معاينة الجوال
+        </button>
+
+        <button
+          id="btn-print"
+          type="button"
+          onclick="handlePrintPaper()"
+          class="px-3.5 py-2 text-xs sm:text-sm font-bold rounded-lg bg-editorialRed text-white hover:opacity-95 transition cursor-pointer"
+        >
+          طباعة / حفظ PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- رسالة تنبيه داخلية بديلة عن alert -->
+    <div id="status-toast" class="hidden mt-3 px-3.5 py-2 rounded-lg bg-editorialNavy text-white text-xs sm:text-sm font-medium">
+      جاري فتح نافذة الطباعة أو الحفظ بصيغة PDF...
+    </div>
+  </header>
+
+  <!-- الإطار الرئيسي للجريدة -->
+  <div id="newspaper-shell" class="max-w-6xl mx-auto transition-all duration-300">
+    <article class="paper-sheet border-2 border-inkPrimary rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
+
+      <!-- 1. الترويسة الصحفية الرسمية (Masthead) -->
+      <div class="px-4 sm:px-8 pt-5 pb-4 bg-newsprintTint/70 border-b border-borderRule">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs font-bold text-inkSecondary pb-2.5 border-b border-borderRule">
+          <span>إصدار بحثي وتحليلي خاص • السوق المالية السعودية (تاسي)</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-editorialRed/10 text-editorialRed">ملف نقدي واستقصائي شامل</span>
+          <span>صوت المستثمر الفرد</span>
+        </div>
+
+        <div class="py-4 text-center">
+          <p class="font-serifAr text-sm sm:text-base font-bold text-editorialRed tracking-wide mb-1">
+            ملف السوق | تحقيق مالي استقصائي خاص
+          </p>
+          <h1 class="font-serifAr font-bold text-3xl sm:text-5xl md:text-6xl text-inkPrimary leading-tight">
+            لماذا يفشل المستثمر الفرد؟
+          </h1>
+          <p class="mt-2.5 max-w-3xl mx-auto text-sm sm:text-lg font-semibold text-inkSecondary leading-relaxed">
+            قراءة نقدية جريئة في بنية السوق المالية السعودية (تاسي)، جمود المؤشر، وثغرات العدالة وتكلفة الفرصة البديلة
+          </p>
+        </div>
+
+        <!-- شريط المحاور السريعة -->
+        <div class="double-editorial-rule py-2 px-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] sm:text-xs font-bold text-inkPrimary">
+          <span>١. وهم الاستثمار وموت النمو</span>
+          <span class="text-editorialRed">•</span>
+          <span>٢. جمود «تاسي» والأسقف الزجاجية</span>
+          <span class="text-editorialRed">•</span>
+          <span>٣. الفجوات والثغرات والتأصيل الشرعي</span>
+          <span class="text-editorialRed">•</span>
+          <span>٤. تكلفة الفرصة البديلة (دراسة حالة)</span>
+          <span class="text-editorialRed">•</span>
+          <span>٥. خارطة الإصلاح الجذري</span>
+        </div>
+      </div>
+
+      <!-- 1.1 صندوق البسملة وخطبة الحاجة والدعاء في صدارة الصحيفة -->
+      <section class="px-4 sm:px-8 pt-6 pb-2">
+        <div class="p-4 sm:p-6 rounded-xl bg-newsprintCard border-2 border-editorialGold/60 shadow-xs text-center relative">
+          <div class="inline-block px-3.5 py-1 rounded-full bg-editorialGold/10 text-editorialGold font-serifAr font-bold text-lg sm:text-xl mb-2.5">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+          <p class="font-serifAr text-base sm:text-xl text-inkPrimary leading-loose max-w-4xl mx-auto">
+            إن الحمد لله نحمده ونستعينه ونستغفره، ونعوذ بالله من شرور أنفسنا، ومن يهدِه الله فلا مُضلَّ له، ومن يُضلل فلا هاديَ له، وأشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمدًا عبده ورسوله.
+          </p>
+          <p class="font-serifAr font-bold text-base sm:text-xl text-editorialNavy mt-2.5 pt-2.5 border-t border-borderRule/70 max-w-2xl mx-auto">
+            «اللهمَّ انفعْني بما علَّمتني، وعلِّمْني ما يَنفعُني، وزِدْنِي علمًا.»
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. الافتتاحية: التشخيص الجذري + وهم الاستثمار وموت النمو (بدون أي تكرار) -->
+      <section class="px-4 sm:px-8 py-6 border-b border-borderRule">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-borderRule">
+          <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 rounded bg-editorialRed text-white">
+            الافتتاحية التحليلية
+          </span>
+          <span class="text-xs font-semibold text-inkSecondary">
+            مدخل لفهم الاختلال البنيوي في علاقة الفرد بالسوق
+          </span>
+        </div>
+
+        <div class="broadsheet-cols-2 text-sm sm:text-[15.5px] leading-relaxed text-inkSecondary space-y-4">
+          <p class="editorial-dropcap text-inkPrimary font-medium">
+            الحقيقة الأكثر وضوحاً وقسوة هي أن البنية الحالية للسوق، بتركيبتها السعرية وآليات تداولها، تضع المستثمر الفرد في موقع غير متكافئ منذ اللحظة الأولى لدخوله، وتجعله الحلقة الأضعف في منظومة مصممة لامتصاص السيولة وتدويرها أكثر من كونها وعاءً لتنمية رؤوس الأموال الصغيرة والمتوسطة.
+          </p>
+
+          <div class="no-col-break pt-1">
+            <h2 class="font-serifAr font-bold text-xl sm:text-2xl text-inkPrimary mb-2 flex items-center gap-2">
+              <span class="w-1.5 h-6 bg-editorialRed rounded-full inline-block"></span>
+              وهم الاستثمار وموت النمو
+            </h2>
+            <p class="mb-3">
+              يُسوَّق للمستثمر الفرد باستمرار أن الصبر والاحتفاظ بالأسهم لسنوات هو المفتاح الذهبي لبناء الثروة، لكن الواقع العملي في السوق السعودي يثبت عكس ذلك تماماً في شريحة واسعة من الشركات. فالمؤشر العام وعدد كبير من الأسهم القيادية والقطاعات التقليدية ظلت تتحرك لسنوات طويلة في نطاقات عرضية مملة أو مسارات هابطة، مما حوّل المحافظ الاستثمارية إلى ما يشبه <strong class="text-inkPrimary">«الودائع المجمدة»</strong> التي لا تنمو قيمتها السوقية.
+            </p>
+            <p>
+              وعندما يمر الزمن دون صعود سعري حقيقي، يكتشف الفرد أن التوزيعات النقدية الهزيلة لبعض الشركات لا تكفي حتى لتغطية التآكل الناتج عن التضخم وارتفاع تكاليف المعيشة، ليجد نفسه بعد سنوات في نقطة الصفر أو دونها من حيث القوة الشرائية لمدخراته.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. القسم الأول: جمود "تاسي": مؤشر يدور في حلقة مفرغة! -->
+      <section class="px-4 sm:px-8 py-6 border-b border-borderRule bg-newsprintCard/70">
+        <div class="mb-4 pb-2.5 border-b-2 border-inkPrimary">
+          <span class="text-xs font-extrabold text-editorialNavy">المحور الأول • تشريح حركة المؤشر العام</span>
+          <h2 class="font-serifAr font-bold text-2xl sm:text-3xl text-inkPrimary mt-0.5">
+            جمود «تاسي»: مؤشر يدور في حلقة مفرغة!
+          </h2>
+        </div>
+
+        <p class="text-sm sm:text-[15.5px] text-inkPrimary font-medium leading-relaxed mb-5 p-3.5 rounded-lg bg-newsprintTint/60 border-r-4 border-editorialNavy">
+          تُعد حالة المؤشر والجمود المزمن التي يعيشها السوق لسنوات متتالية واحدة من أشد الظواهر إحباطاً للمستثمر الفرد؛ إذ يستهلك الوقت والسيولة دون أن يغادر مربعه القديم، تاركاً المتعاملين في حالة دوران مستمر داخل حلقة مفرغة لا تصنع ثروة ولا تمنح أفقاً واضحاً للنمو.
+        </p>
+
+        <div class="broadsheet-cols-2 text-sm sm:text-[15px] leading-relaxed text-inkSecondary space-y-4">
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1.5">
+              صراع الأوزان الثقيلة وشلل الاتجاه العام
+            </h3>
+            <p>
+              يعاني مؤشر «تاسي» من خلل هيكلي في طريقة احتسابه، حيث تتركز القوة المؤثرة في عدد محدود من الشركات العملاقة ذات القيمة السوقية الضخمة، وعلى رأسها قطاع الطاقة (أرامكو) وقطاع المواد الأساسية (البتروكيماويات) والبنوك الكبرى. هذا التركّز خلق حالة من <strong class="text-inkPrimary">«الشد العكسي»</strong> الدائم؛ فكلما حاولت قطاعات محلية واعدة كالتقنية أو الرعاية الصحية أو التجزئة الصعود وتحقيق قمم جديدة، جاءت ضغوط أسعار النفط العالمية أو تراجع دورات البتروكيماويات لتهوي بالأسهم القيادية وتسحب المؤشر بأكمله إلى نقطة البداية. والنتيجة هي سوق مشلول الاتجاه، يبدو ظاهرياً في حالة تداول نشط، لكنه فعلياً يراوح مكانه منذ سنوات.
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1.5">
+              تدوير السيولة الساخنة و«اللعبة المتفق عليها»
+            </h3>
+            <p>
+              ما يحدث داخل جلسات التداول في سنوات الجمود ليس نمواً حقيقياً في حجم السوق، بل هو <strong class="text-inkPrimary">«لعبة متفق عليها»</strong> للسيولة الموجودة. فبسبب غياب المحفزات الكبرى التي تجذب رؤوس أموال استثمارية جديدة ومستدامة، تنتقل السيولة الساخنة بشكل عشوائي ومؤقت من قطاع إلى آخر، ومن سهم مضاربي إلى آخر؛ يرتفع قطاع التأمين أسبوعاً فتُترك البنوك، ثم تُسحب السيولة نحو الأسهم الصغيرة وتُترك الشركات المتوسطة. هذا التدوير السريع يخلق وهماً بالحركة، لكنه في جوهره مجرد نقل للأموال من محفظة إلى أخرى دون إضافة أي قيمة سوقية حقيقية للسوق ككل، مما يُبقي المؤشر محبوساً في نفس المستويات السعرية.
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1.5">
+              مصيدة النطاق العرضي واستنزاف نفسية المستثمر
+            </h3>
+            <p>
+              عندما يستمر المؤشر في التحرك داخل قناة أفقية لثلاث أو أربع سنوات، فإنه يدخل في دوامة نفسية سلبية تُعرف بـ <strong class="text-inkPrimary">«فقدان الثقة في الاختراقات»</strong>. فكل محاولة صعود يواجهها السوق تصطدم بعمليات بيع كثيفة من مستثمرين عالقين في قمم سابقة ينتظرون بفارغ الصبر استرداد رؤوس أموالهم للخروج من السوق، أو من مضاربين اعتادوا أن أي ارتفاع هو مجرد فرصة للبيع السريع قبل عودة الهبوط. هذا السلوك الجماعي حوّل مستويات المقاومة في المؤشر إلى <strong class="text-inkPrimary">«أسقف زجاجية»</strong> شبه مستحيلة الكسر، وجعل السوق يدور في دائرة مغلقة من التفاؤل الحذر يعقبه إحباط سريع.
+            </p>
+          </div>
+
+          <!-- صندوق اقتباس صحفي بارز -->
+          <blockquote class="no-col-break my-3 p-4 rounded-xl bg-newsprint border-2 border-editorialRed/40 shadow-xs">
+            <span class="block text-[11px] font-extrabold text-editorialRed mb-1">إضاءة تحليلية</span>
+            <p class="font-serifAr font-bold text-lg sm:text-xl text-inkPrimary leading-relaxed">
+              «حوّل هذا السلوك الجماعي مستويات المقاومة في المؤشر إلى (أسقف زجاجية) شبه مستحيلة الكسر، وانقلبت قاعدة الزمن رأساً على عقب ليصبح العدو الأول للمستثمر الفرد.»
+            </p>
+          </blockquote>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1.5">
+              انقلاب قاعدة الزمن
+            </h3>
+            <p>
+              في الأسواق المالية المتقدمة، يُعتبر «الزمن» الحليف الأقوى للمستثمر؛ فكلما طالت مدة الاحتفاظ بالأسهم، تضاعفت الأرباح بفضل النمو المركب. أما في ظل جمود «تاسي»، فقد انقلبت هذه القاعدة رأساً على عقب وأصبح الزمن هو العدو الأول للمستثمر الفرد. فمرور أربع سنوات دون اختراق حقيقي للمؤشر يعني عملياً أن المستثمر خسر ١٠٠٪ من العائد الزمني لرأس ماله، حتى في ظل التوزيعات، وتكبّد خسارة صامتة تتمثل في تآكل القوة الشرائية لمدخراته بفعل التضخم، بينما كانت السيولة ذاتها قادرة على تحقيق عوائد مضمونة في أدوات الدخل الثابت أو نمو متسارع في الأسواق العالمية.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. القسم الثاني: الفجوات والثغرات -->
+      <section class="px-4 sm:px-8 py-6 border-b border-borderRule">
+        <div class="mb-4 pb-2.5 border-b-2 border-inkPrimary">
+          <span class="text-xs font-extrabold text-editorialRed">المحور الثاني • الاختلالات التنظيمية والسلوكية</span>
+          <h2 class="font-serifAr font-bold text-2xl sm:text-3xl text-inkPrimary mt-0.5">
+            الفجوات والثغرات: حين تتحول السوق إلى ساحة مفتوحة للاستنزاف
+          </h2>
+        </div>
+
+        <p class="text-sm sm:text-[15.5px] text-inkSecondary leading-relaxed mb-5">
+          لا يقتصر الخلل في السوق المالية السعودية على ضعف العوائد أو جمود المؤشر فحسب، بل يمتد إلى بنية السوق الداخلية وآليات التداول والرقابة، والتي تعاني من ثغرات جوهرية تضع المستثمر الفرد في موضع استنزاف دائم. فعندما يغيب التكافؤ في المعلومة والقدرة على التأثير، تتحول السوق من بيئة استثمارية عادلة إلى ساحة مفتوحة للممارسات الانتهازية التي تلتهم مدخرات الأفراد ببطء.
+        </p>
+
+        <div class="responsive-grid-2 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-[15px] leading-relaxed text-inkSecondary">
+          <!-- الثغرة 1 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs">
+            <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠١ • العدالة المعلوماتية</span>
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+              تسرب المعلومات الجوهرية وانعدام العدالة الزمنية (التداول بناءً على معلومات داخلية)
+            </h3>
+            <p>
+              تُعد هذه الثغرة من أخطر المشاكل التي تفتك بمصداقية أي سوق مالي. ففي كثير من الحالات، تسبق الحركة السعرية الحادة على السهم صدور الإعلان الرسمي على موقع «تداول» بأيام أو حتى أسابيع؛ سواء كان الإعلان يتعلق بنتائج مالية استثنائية، أو توزيعات أرباح، أو تعثر مالي، أو صفقات استحواذ. هذا الخلل يعني أن شريحة من المتنفذين والمطلعين تحصل على المعلومة مبكراً وتبني مراكزها الشرائية أو البيعية في صمت، بينما يظل المستثمر الفرد يعتمد على القوائم المالية القديمة والتصريحات المتأخرة، فلا يدخل السهم إلا بعد أن يكون قد استنفد صعوده، ولا يعلم بالكارثة إلا بعد أن يهوي السهم ويُغلق.
+            </p>
+          </div>
+
+          <!-- الثغرة 2 + الاستشهاد الفقهي الكامل -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs flex flex-col justify-between">
+            <div>
+              <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠٢ • النزاهة السعرية</span>
+              <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+                التلاعب السعري وتدوير الأسهم ذات القيمة المنخفضة
+              </h3>
+              <p class="mb-3">
+                تستغل المحافظ الكبيرة والمجموعات المضاربية ثغرة قلة الأسهم الحرة المتاحة للتداول في بعض الشركات الصغيرة والمتوسطة للسيطرة شبه الكاملة على عرض السهم وطلبه. ومن خلال عمليات «التدوير» (البيع والشراء الوهمي بين محافظ مترابطة)، يتم خلق سيولة مصطنعة وإيهام السوق بوجود زخم شرائي قوي، مما يدفع الأفراد للدخول بدافع الخوف من فوات الفرصة. وبمجرد أن تكتمل عملية التصريف على الأفراد عند قمم سعرية غير مبررة مالياً، تُسحب طلبات الشراء فجأة ويُترك السهم لينهار، مما يُكبد الأفراد خسائر فادحة في أيام معدودة.
+              </p>
+            </div>
+
+            <!-- صندوق الاستشهاد الشرعي والفقهي الكامل -->
+            <div class="p-3.5 rounded-lg bg-newsprint border-r-4 border-editorialRed border border-borderRule">
+              <span class="block text-[11px] font-bold text-editorialRed mb-1">
+                تأصيل شرعي وفقهي للممارسة:
+              </span>
+              <p class="font-serifAr text-base sm:text-lg text-inkPrimary leading-relaxed">
+                كما قد قرأت في كتاب <strong class="font-bold">(فقه المعاملات المالية المعاصرة للشيخ سعد الخثلان)</strong> التلاعب والعروض الوهمية قد أجمع العلماء على تحريمها وهي من الصفات السيئة، فقد جاء في حديث قيس بن سعد بن عبادة قال: سمعت رسول الله صلى الله عليه وسلم يقول:
+                <strong class="text-editorialRed font-bold">{المكر والخديعة في النار}</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- الثغرة 3 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs">
+            <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠٣ • تسعير السوق الأولية</span>
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+              ثغرة «بناء سجل الأوامر» وتضخيم تقييمات الاكتتابات الأولية
+            </h3>
+            <p>
+              تُعد آلية تسعير الطروحات الأولية الحالية واحدة من أكبر الفجوات التي استنزفت سيولة الأفراد؛ حيث يُترك تحديد النطاق السعري للشركة المطروحة للمؤسسات المالية عبر بناء سجل الأوامر، وهو ما أدى مراراً إلى المبالغة الشديدة في تقييم شركات عادية أو ذات نمو محدود، وطرحها بمكررات ربحية فلكية. وعندما تُطرح هذه الأسهم للأفراد بالسعر الأقصى، يكتشف المستثمر الفرد بعد الإدراج بفترة وجيزة أن السهم مُسعّر بأكثر من قيمته العادلة بكثير، ليبدأ السهم رحلة تصحيح وهبوط طويلة تحبس سيولة الأفراد وتُفقدهم جزءاً كبيراً من رؤوس أموالهم لصالح ملاك الشركات المؤسسين الذين باعوا حصصهم بأعلى سعر ممكن.
+            </p>
+          </div>
+
+          <!-- الثغرة 4 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs">
+            <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠٤ • الإفصاح والمساءلة</span>
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+              غياب الشفافية وتأخر المحاسبة
+            </h3>
+            <p>
+              يعاني المستثمر الفرد من فجوة واضحة في جودة وتوقيت الإفصاحات المالية لبعض الشركات المدرجة؛ حيث تظهر أحياناً مخصصات مالية مفاجئة، أو انخفاضات حادة في الأرباح، أو تعثر في مشاريع قائمة دون سابق إنذار أو تدرج منطقي في البيانات الربعية السابقة. وعندما تقع المخالفات الإدارية أو المحاسبية داخل بعض الشركات وتؤدي إلى تعليق السهم أو تصفية الشركة، يكون المستثمر الفرد هو المتضرر الوحيد الذي تتبخر مدخراته، في ظل بطء الإجراءات القانونية لصرف التعويضات أو محاسبة المتسببين بشكل رادع يعيد الحقوق لأصحابها.
+            </p>
+          </div>
+
+          <!-- الثغرة 5 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs">
+            <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠٥ • عدم التكافؤ التقني</span>
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+              استغلال التداولات الخوارزمية والفجوة التقنية
+            </h3>
+            <p>
+              أتاح التطور التقني للمؤسسات والمحافظ الضخمة استخدام أنظمة التداول الخوارزمي عالي التردد، والتي تقوم بوضع وسحب آلاف الأوامر في أجزاء من الثانية للضغط على أسعار الأسهم. أمام هذه الآلة التقنية المعقدة، يقف المستثمر الفرد بأدواته البسيطة وشاشة التداول التقليدية عاجزاً عن قراءة العمق الحقيقي للسوق، ليصبح فريسة سهلة وإخراجه من أسهمه عند أدنى الأسعار قبل أن يعاود السهم الارتفاع مجدداً.
+            </p>
+          </div>
+
+          <!-- الثغرة 6 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule shadow-2xs">
+            <span class="inline-block text-xs font-extrabold text-editorialRed mb-1">٠٦ • الردع والحماية</span>
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-2">
+              غياب التوازن في الحماية والرقابة الاستباقية
+            </h3>
+            <p>
+              تتركز الكثير من الإجراءات الرقابية في السوق على المعالجة اللاحقة بعد وقوع الضرر؛ أي فرض غرامات مالية بعد أشهر أو سنوات من حدوث التلاعب أو التسريب، وهي غرامات تذهب لخزينة الجهات الرسمية ولا تُعوّض المستثمر الفرد الذي خسر مدخراته في تلك الصفقة. هذا القصور في الحماية الاستباقية جعل كلفة التلاعب أقل بكثير من مكاسبه بالنسبة للمخالفين، وأبقى المستثمر الفرد مكشوفاً بلا مظلة أمان حقيقية تحمي أمواله من الاستغلال.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. القسم الثالث: سنوات من الجمود وتكلفة الفرصة البديلة + دراسة الحالة العملية -->
+      <section class="px-4 sm:px-8 py-6 border-b border-borderRule bg-newsprintCard/70">
+        <div class="mb-4 pb-2.5 border-b-2 border-inkPrimary">
+          <span class="text-xs font-extrabold text-editorialNavy">المحور الثالث • الاقتصاد السلوكي والعائد الحقيقي</span>
+          <h2 class="font-serifAr font-bold text-2xl sm:text-3xl text-inkPrimary mt-0.5">
+            سنوات من الجمود وتكلفة الفرصة البديلة: عندما يصبح الوقت عدو رأس المال
+          </h2>
+        </div>
+
+        <p class="text-sm sm:text-[15.5px] text-inkSecondary leading-relaxed mb-5">
+          في علم الاستثمار، لا تُقاس الخسارة فقط بتراجع الرقم الظاهر في المحفظة، بل تُقاس بما يُعرف بـ <strong class="text-inkPrimary">«تكلفة الفرصة البديلة»</strong> للعائد المضمون أو المرتفع الذي ضاع على المستثمر بسبب تجميد أمواله في أصل راكد لسنوات طويلة. وعلى مدى الأعوام الثلاثة إلى الأربعة الماضية، لم يكتفِ السوق السعودي بحرمان المستثمر الفرد من تحقيق أرباح رأسمالية، بل كبّده خسارة مزدوجة تتمثل في تآكل القوة الشرائية لمدخراته، وضياع موجات صعود تاريخية شهدتها الأسواق والأصول البديلة حول العالم.
+        </p>
+
+        <div class="broadsheet-cols-2 text-sm sm:text-[15px] leading-relaxed text-inkSecondary space-y-4 mb-6">
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1">
+              وهم «التعادل السعري»
+            </h3>
+            <p>
+              يعتقد كثير من المستثمرين الأفراد أن بقاء محفظتهم عند نفس مستوى رأس المال بعد مرور ثلاث أو أربع سنوات يعني أنهم لم يخسروا شيئاً، وهذه إحدى أكبر المغالطات المالية. فخلال هذه السنوات، ارتفعت تكاليف المعيشة والخدمات وأسعار الأصول، وتآكلت القوة الشرائية للريال بنسبة تراكمية ملموسة. وبالتالي، فإن المستثمر الذي دخل السوق بمبلغ معين وخرج بنفس المبلغ بعد أربع سنوات، هو في الحقيقة خاسر بالقيمة الحقيقية؛ لأن قدرته الشرائية تراجعت، وعمره الاستثماري استُهلك دون أي عائد يعوّض هذا التآكل.
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1">
+              ضياع العائد المركب
+            </h3>
+            <p>
+              تعتمد فلسفة بناء الثروات الفردية على «الفائدة المركبة»؛ حيث تُضاف أرباح كل عام إلى رأس المال لتُنتج أرباحاً أكبر في العام الذي يليه. لكن جمود المؤشر العام وتحركه في نطاق عرضي ضيق لسنوات أدّى إلى كسر سلسلة التراكم هذه تماماً. فبدلاً من أن تتضاعف المحفظة عبر السنوات، تحول المستثمر الفرد إلى مجرد «مراقب للشاشة» ينتظر بفارغ الصبر عودة سهمه إلى سعر التكلفة ليفك تعليقته، مما حوّل الاستثمار من أداة لنمو الثروة إلى عملية استرداد رأس مال مرهقة نفسياً ومالياً.
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1">
+              المقارنة القاسية مع الأسواق العالمية (نمو حقيقي)
+            </h3>
+            <p>
+              تتجلى فداحة تكلفة الفرصة البديلة عند وضع أداء السوق السعودي (تاسي) جنباً إلى جنب مع الأسواق المتقدمة—وعلى رأسها السوق الأمريكي (مؤشر S&amp;P 500 أو ناسداك)—خلال نفس الفترة الزمنية. فبينما كان المستثمر الفرد في السوق المحلي يدور في حلقة مفرغة ويصارع التذبذبات السعرية والصفقات المشبوهة، كانت المحافظ المستثمرة في المؤشرات العالمية تحقق قفزات تاريخية ومضاعفات حقيقية لرؤوس الأموال مدفوعة بشركات النمو والابتكار والرقابة الصارمة. هذا التباين كشف للمستثمر الفرد أن المشكلة لم تكن في «سوء توقيته» أو «قلة خبرته»، بل في طبيعة السوق الذي اختار الاستثمار فيه.
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1">
+              تفوق أدوات الدخل الثابت والصكوك (العائد بلا مخاطرة)
+            </h3>
+            <p>
+              لم تقتصر الفرصة الضائعة على الأسواق العالمية فحسب، بل ظهرت حتى داخل البيئة المالية المحلية. فمع ارتفاع أسعار الفائدة لسنوات متتالية، قدمت الودائع البنكية (المرابحة) والصكوك الحكومية وصناديق أسواق النقد عوائد سنوية مجزية ومستقرة تتراوح بين ٥٪ و٦٪ دون أي مخاطرة تذكر على رأس المال. وفي المقابل، تحمل المستثمر الفرد في سوق الأسهم مخاطر التقلبات الحادة، وتلاعبات المضاربين، وانهيار أسعار الاكتتابات، ليحصل في النهاية على عائد صفري أو سالب، وهو ما يمثل قمة الاختلال في معادلة «العائد مقابل المخاطرة».
+            </p>
+          </div>
+
+          <div class="no-col-break">
+            <h3 class="font-displayAr font-bold text-base sm:text-lg text-inkPrimary mb-1">
+              الهجرة الصامتة لرؤوس الأموال الفردية
+            </h3>
+            <p>
+              أدّى هذا الشعور المتراكم بالإحباط وضياع الفرص إلى ظاهرة متنامية تتمثل في فقدان الثقة المؤسسي والنفسي بالسوق المحلي. فقد أدرك جيل جديد من المستثمرين الأفراد أن البقاء في سوق تحكمه القطاعات التقليدية المتشبعة وتُستنزف سيولته باستمرار هو هدر للمال والوقت، مما دفع شريحة متزايدة منهم إلى سحب سيولتهم والتوجه نحو الأسواق العالمية بحثاً عن بيئة أكثر أماناً وشفافية، حيث تُكافأ شركات النمو الحقيقية، ويُحمى المستثمر الصغير بقوانين صارمة لا تسمح بتحويل السوق إلى ساحة لتصريف الأسهم المتضخمة.
+            </p>
+          </div>
+        </div>
+
+        <!-- دراسة الحالة العملية المعتمدة: كشف حساب محفظتين بقيمة 100,000 ريال -->
+        <div class="rounded-2xl bg-newsprintCard border-2 border-editorialNavy overflow-hidden shadow-md">
+          <div class="bg-editorialNavy text-white px-4 sm:px-6 py-4">
+            <span class="inline-block text-[11px] font-bold bg-white/15 px-2.5 py-0.5 rounded mb-1">
+              كشف حساب عملي • مقارنة محفظتين بقيمة ١٠٠,٠٠٠ ريال (نوفمبر ٢٠٢٢ — اليوم)
+            </span>
+            <h3 class="font-serifAr font-bold text-xl sm:text-2xl leading-snug">
+              محفظة الراجحي وتوزيعاته مقابل محفظة مايكروسوفت ونموها المركب
+            </h3>
+          </div>
+
+          <!-- نص الافتراضات المعتمد أعلى الجدول -->
+          <div class="px-4 sm:px-6 py-3.5 bg-newsprint border-b border-borderRule text-xs sm:text-sm text-inkPrimary leading-relaxed">
+            هذا مثال افتراضي بمبلغ <strong class="text-editorialRed font-bold">100,000 ريال</strong> في كل محفظة، بدأ في نوفمبر 2022 وينتهي اليوم. لا توجد إعادة استثمار للتوزيعات، وأُهملت الرسوم والزكاة. الريال مربوط بالدولار عند 3.75، فمبلغ المحفظة الثانية يساوي نحو <strong class="text-editorialNavy font-bold">26,667 دولاراً</strong>.
+          </div>
+
+          <!-- جدول المقارنة المتجاوب -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-newsprintTint border-b-2 border-inkPrimary text-inkPrimary font-extrabold">
+                  <th class="py-3 px-3 sm:px-5 w-1/3">بند المقارنة</th>
+                  <th class="py-3 px-3 sm:px-5 w-1/3 text-editorialRed border-r border-borderRule">
+                    محفظة الراجحي
+                  </th>
+                  <th class="py-3 px-3 sm:px-5 w-1/3 text-editorialNavy border-r border-borderRule">
+                    محفظة مايكروسوفت
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-borderRule text-inkSecondary">
+                <tr class="bg-newsprintCard">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">سعر الشراء (تقدير)</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 53 ريال (معدّل بأسهم المنحة)</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 242 دولار</td>
+                </tr>
+                <tr class="bg-newsprint/60">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">عدد الأسهم</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 1,887</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 110</td>
+                </tr>
+                <tr class="bg-newsprintCard">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">السعر الآن (تقدير)</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 65 ريال</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 545 دولار</td>
+                </tr>
+                <tr class="bg-newsprint/60">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">قيمة الأسهم الآن</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule font-semibold text-inkPrimary">≈ 122,600 ريال</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule font-semibold text-inkPrimary">≈ 225,500 ريال</td>
+                </tr>
+                <tr class="bg-newsprintCard">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">إجمالي التوزيعات المستلمة</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 13,400 ريال</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 5,000 ريال (قبل الضريبة)</td>
+                </tr>
+                <tr class="bg-newsprintTint/90 font-extrabold text-inkPrimary border-t-2 border-inkPrimary">
+                  <td class="py-3 px-3 sm:px-5">المجموع الكلي</td>
+                  <td class="py-3 px-3 sm:px-5 border-r border-borderRule text-editorialRed text-sm sm:text-base">
+                    ≈ 136,000 ريال
+                  </td>
+                  <td class="py-3 px-3 sm:px-5 border-r border-borderRule text-editorialNavy text-sm sm:text-base">
+                    ≈ 230,400 ريال
+                  </td>
+                </tr>
+                <tr class="bg-newsprintCard font-bold">
+                  <td class="py-2.5 px-3 sm:px-5 text-inkPrimary">الربح الكلي</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule text-editorialRed">≈ +36%</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule text-editorialNavy">≈ +130%</td>
+                </tr>
+                <tr class="bg-newsprint/60">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">العائد سنوياً (تقريباً)</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 8%</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ 23%</td>
+                </tr>
+                <tr class="bg-newsprintCard">
+                  <td class="py-2.5 px-3 sm:px-5 font-bold text-inkPrimary">الربح من السعر وحده</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ +23%</td>
+                  <td class="py-2.5 px-3 sm:px-5 border-r border-borderRule">≈ +125%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- شريط الخلاصة الرقمية أسفل الجدول -->
+          <div class="px-4 sm:px-6 py-3.5 bg-editorialRed text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs sm:text-sm font-bold">
+            <span>فارق تكلفة الفرصة البديلة: +94,400 ريال لصالح محفظة النمو خلال نفس الفترة الزمنية.</span>
+            <span class="text-[11px] bg-white/15 px-2.5 py-0.5 rounded w-fit">١٣٦,٠٠٠ ريال مقابل ٢٣٠,٤٠٠ ريال</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. القسم الرابع: خارطة الإصلاح -->
+      <section class="px-4 sm:px-8 py-6 border-b border-borderRule">
+        <div class="mb-4 pb-2.5 border-b-2 border-inkPrimary">
+          <span class="text-xs font-extrabold text-editorialRed">المحور الرابع • الحلول العملية والهيكلية</span>
+          <h2 class="font-serifAr font-bold text-2xl sm:text-3xl text-inkPrimary mt-0.5">
+            خارطة الإصلاح: كيف يستعيد السوق السعودي ثقة المستثمر الفرد؟
+          </h2>
+        </div>
+
+        <p class="text-sm sm:text-[15.5px] text-inkSecondary leading-relaxed mb-5">
+          في ختام هذا الطرح التحليلي، تتضح حقيقة جوهرية لا تقبل المواربة: إن أزمة المستثمر الفرد في السوق المالية السعودية ليست أزمة «قلة صبر» أو «نقص ثقافة مالية» كما يُروَّج له دائماً، بل هي نتيجة حتمية لبيئة استثمارية تعاني من اختلالات هيكلية وسلوكية عميقة. فعلى مدى سنوات، تحوّل المؤشر العام (تاسي) إلى ساحة تدور في حلقة مفرغة، تُستنزف فيها مدخرات الأفراد عبر طروحات أولية متضخمة التقييم، وتُدار فيها الأسعار وسط فجوة معلوماتية وتقنية غير عادلة، مما أفقد السوق أهم وظائفه الاقتصادية: صناعة الثروة وتنمية المدخرات الفردية. ولأن استمرار هذا الوضع يعني مزيداً من تآكل القوة الشرائية للمواطن وهجرة رؤوس الأموال الفردية نحو الأسواق العالمية الأكثر شفافية وكفاءة، فإن الانتقال من مرحلة «التشخيص» إلى مرحلة «الإصلاح الجذري» يتطلب تبني خارطة طريق عملية وحازمة تقوم على المحاور الستة التالية:
+        </p>
+
+        <div class="responsive-grid-2 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-[15px] leading-relaxed text-inkSecondary">
+          <!-- محور 1 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">١</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                إصلاح هيكلة المؤشر وكسر احتكار الأوزان الثقيلة
+              </h3>
+            </div>
+            <p>
+              إعادة صياغة منهجية حساب المؤشر العام وتحديد سقوف عادلة لأوزان الشركات العملاقة، بحيث يعكس «تاسي» الأداء الحقيقي للشركات المدرجة والقطاعات النامية بدلاً من بقائه رهينة لتقلبات عدد محدود من الأسهم القيادية.
+            </p>
+          </div>
+
+          <!-- محور 2 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">٢</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                فرض معايير صارمة لتسعير الطروحات الأولية وحظر التلميع المالي
+              </h3>
+            </div>
+            <p>
+              لوقف نزيف السيولة الفردية في الاكتتابات، يجب أن تفرض الجهات التنظيمية معايير تقييم أكثر تشدداً؛ بحيث يُربط تسعير السهم بمتوسط الأرباح التشغيلية المستدامة، كما يجب تمديد فترة حظر بيع كبار الملاك والمؤسسين إلى سنتين أو ثلاث سنوات بعد الإدراج، وربط فك الحظر بتحقيق الشركة لمستهدفات الأرباح المعلنة في نشرة الإصدار، لضمان ألا تتحول الاكتتابات إلى بوابة تخارج مربحة للملاك القدامى على حساب الأفراد.
+            </p>
+          </div>
+
+          <!-- محور 3 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">٣</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                تشديد الرقابة الاستباقية وتغليظ عقوبات تسريب المعلومات والتلاعب
+              </h3>
+            </div>
+            <p>
+              لا يمكن بناء ثقة حقيقية دون ردع صارم يطال المتلاعبين بالأسعار وأصحاب المعلومات الداخلية. يتطلب ذلك تفعيل أنظمة رقابة لحظية مدعومة بالذكاء الاصطناعي لرصد التداولات المشبوهة والصفقات الخاصة التي تسبق الإعلانات الجوهرية، مع تطبيق مبدأ «الشفافية العقابية»؛ أي نشر أسماء المخالفين والمتلاعبين للعلن فوراً، ومصادرة الأرباح غير المشروعة لإعادتها مباشرة إلى المحافظ المتضررة كما تفعل هيئات الأسواق المالية المتقدمة، بدلاً من الاكتفاء بغرامات مالية رمزية لا توازي حجم الضرر.
+            </p>
+          </div>
+
+          <!-- محور 4 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">٤</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                تحجيم التداولات الخوارزمية وضمان تكافؤ الفرص التقنية
+              </h3>
+            </div>
+            <p>
+              لحماية المستثمر الفرد من الضغوط النفسية والسعرية المفتعلة، يجب فرض قيود تنظيمية صارمة على التداولات الخوارزمية عالية التردد مثل فرض حد أدنى لمدة بقاء الأوامر في سجل التداول قبل إلغائها، وفرض رسوم على الإلغاءات المتكررة للأوامر الوهمية؛ وذلك للقضاء على ظاهرة بناء الجدران السعرية الوهمية التي تُستخدم لخداع صغار المتداولين وتوجيه الأسعار قسراً.
+            </p>
+          </div>
+
+          <!-- محور 5 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">٥</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                توفير أدوات تحوط واستثمار مرنة وميسرة للأفراد
+              </h3>
+            </div>
+            <p>
+              يجب إنهاء حالة «الاتجاه الواحد» التي تحصر الفرد في الشراء والانتظار فقط. يتعين تطوير منتجات استثمارية منخفضة التكلفة وعادلة التسعير، مثل صناديق المؤشرات المتداولة المتنوعة، وأدوات التحوط المبسطة والمراقبة بصرامة، لتمكين المستثمر الفرد من حماية محفظته في أوقات الهبوط أو تنويع استثماراته بسهولة دون الوقوع تحت رحمة المضاربين.
+            </p>
+          </div>
+
+          <!-- محور 6 -->
+          <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-editorialNavy text-white text-xs font-bold flex items-center justify-center shrink-0">٦</span>
+              <h3 class="font-displayAr font-bold text-base text-inkPrimary">
+                رفع مستوى الحوكمة ومساءلة مجالس الإدارات
+              </h3>
+            </div>
+            <p>
+              يجب تفعيل دور جمعيات المساهمين وتمكين صغار الملاك من محاسبة مجالس الإدارات التي تفشل في تحقيق النمو أو تهدر أموال الشركات في توسعات غير مدروسة. إن ربط مكافآت كبار التنفيذيين وأعضاء مجالس الإدارات بنمو العائد الفعلي للسهم على المدى المتوسط والطويل، وليس بمجرد البقاء في المنصب، سيجبر الشركات على العمل بجدية لخلق قيمة حقيقية تنعكس على سعر السهم في السوق.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. الخلاصة التي لا تقبل المجاملة + التنويه المنهجي -->
+      <section class="px-4 sm:px-8 py-6">
+        <!-- صندوق الخلاصة التي لا تقبل المجاملة بالنص الكامل -->
+        <div class="p-5 sm:p-7 rounded-2xl bg-inkPrimary text-newsprint border-2 border-editorialRed shadow-lg mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-white/15">
+            <span class="text-xs sm:text-sm font-extrabold tracking-wide text-amber-300">
+              الخلاصة التي لا تقبل المجاملة
+            </span>
+            <span class="text-xs text-newsprint/75">الكلمة الختامية للبحث</span>
+          </div>
+
+          <p class="font-serifAr text-xl sm:text-2xl leading-relaxed text-newsprint mb-3.5">
+            في النهاية، لم يعد مقبولاً تبرير فشل السوق بالظروف العالمية أو نقص وعي الأفراد؛ فالحقيقة العارية أن المستثمر الفرد في السوق السعودي بات يدفع ثمن ثغرات لم تُغلق، وتقييماتٍ لم تُضبط، ومؤشرٍ صُمّم ليبقى رهينة لعدد محدود من الأسهم العملاقة.
+          </p>
+
+          <p class="text-sm sm:text-base leading-relaxed text-newsprint/90">
+            إن استمرار الوضع الحالي يعني ببساطة تحويل السوق من منصة لتنمية مدخرات المواطن إلى محرقة صامتة للأموال والفرص، وتهجيرٍ قسري لرؤوس الأموال الوطنية نحو أسواق خارجية تحترم أموال الصغار وتحميها بالقانون لا بالوعود. إما أن يُعاد بناء هذا السوق على أساس العدالة والشفافية وتكافؤ الفرص، أو سيجد نفسه قريباً ساحةً فارغة يتداول فيها الكبار مع أنفسهم بعد أن يغادرها الفرد إلى غير رجعة.
+          </p>
+        </div>
+
+        <!-- صندوق التنويه المنهجي المعتمد -->
+        <div class="p-4 rounded-xl bg-newsprintCard border border-borderRule border-r-4 border-r-editorialNavy text-xs sm:text-sm text-inkSecondary leading-relaxed">
+          <strong class="text-editorialNavy font-bold">تنويه منهجي:</strong>
+          الأفكار والتحليلات والاستنتاجات الواردة في هذا البحث هي نتاج جهد الكاتب ورؤيته الشخصية، وقد تمت الاستعانة بتقنيات الذكاء الاصطناعي كأداة مساعدة لإعادة صياغة النص وتهذيبه لغوياً، ونقله من الأسلوب العامي إلى لغة عربية فصحى منظّمة تخدم وضوح الطرح وسلاسة العرض.
+        </div>
+      </section>
+
+      <!-- تذييل الصحيفة -->
+      <footer class="px-4 sm:px-8 py-3.5 bg-newsprintTint border-t border-borderRule flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-inkSecondary">
+        <span>ملف السوق | تحقيق مالي استقصائي خاص — لماذا يفشل المستثمر الفرد؟</span>
+        <span>مصمم للقراءة الواضحة على الجوال وسطح المكتب</span>
+      </footer>
+
+    </article>
+  </div>
+
+  <script>
+    /**
+     * تبديل وضع معاينة الجريدة بين العرض التلقائي المتجاوب،
+     * ومعاينة سطح المكتب (عمودين)، ومعاينة الجوال (عمود واحد بعرض الهاتف).
+     */
+    function switchViewMode(mode) {
+      try {
+        const shell = document.getElementById('newspaper-shell');
+        const btnAuto = document.getElementById('btn-auto');
+        const btnDesktop = document.getElementById('btn-desktop');
+        const btnMobile = document.getElementById('btn-mobile');
+
+        if (!shell || !btnAuto || !btnDesktop || !btnMobile) return;
+
+        [btnAuto, btnDesktop, btnMobile].forEach((btn) => {
+          btn.classList.remove('toolbar-btn-active');
+        });
+
+        shell.classList.remove('force-desktop-view', 'force-mobile-view', 'max-w-[430px]', 'max-w-6xl', 'max-w-7xl');
+
+        if (mode === 'mobile') {
+          shell.classList.add('force-mobile-view', 'max-w-[430px]');
+          btnMobile.classList.add('toolbar-btn-active');
+        } else if (mode === 'desktop') {
+          shell.classList.add('force-desktop-view', 'max-w-7xl');
+          btnDesktop.classList.add('toolbar-btn-active');
+        } else {
+          shell.classList.add('max-w-6xl');
+          btnAuto.classList.add('toolbar-btn-active');
+        }
+      } catch (err) {
+        console.error('تعذر تبديل وضع المعاينة:', err);
+      }
+    }
+
+    /**
+     * فتح نافذة الطباعة أو التصدير بصيغة PDF مع إظهار إشعار بصري لطيف.
+     */
+    function handlePrintPaper() {
+      try {
+        const toast = document.getElementById('status-toast');
+        if (toast) {
+          toast.classList.remove('hidden');
+          setTimeout(() => {
+            toast.classList.add('hidden');
+          }, 3000);
+        }
+        window.print();
+      } catch (err) {
+        console.error('تعذر تشغيل أمر الطباعة:', err);
+      }
+    }
+  </script>
+</body>
+</html>
